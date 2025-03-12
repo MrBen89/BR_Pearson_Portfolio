@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Amstrad";
+  src: url("amstrad_cpc464.ttf") format("truetype");
+}
+
+
+.screen {
+  background-color: rgb(29, 114, 219);
+  color: rgb(223, 228, 90);
+  border: 15px solid rgb(25, 25, 25);
+  font-family: "Amstrad";
+  width: 85vw;
+  height: 85vh;
+  border-radius: 5%;
+  margin: auto auto;
+  line-height: 150%;
+}
+
+.monitor {
+  background-color: rgb(55, 55, 55);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  margin: 0;
+}
+
+.title {
+  width: fit-content;
+  margin-top: 0;
+  margin: auto;
+  white-space: pre;
+}
+
+.text-display {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+.end-block {
+  animation: blink 1.5s infinite;
+}
+
+.screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+.screen::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.27861;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 100%;
+  }
+  30% {
+    opacity: 0%;
+  }
+}
