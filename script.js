@@ -4,14 +4,17 @@ const bio = document.getElementById("bio").innerHTML
 const stack = document.getElementById("stack").innerHTML
 const projects = document.getElementById("projects").innerHTML
 const contact = document.getElementById("contact").innerHTML
-const options = document.getElementById("options").innerHTML
+const options = document.getElementById("options")
+const optionsInner = document.getElementById("options-inner").innerHTML
 
 let charArray = []
 let selectionText = []
 
 const elementDraw = (element) => {
+  console.log(element)
   const list = element.split("<br")
   contentBox.innerHTML = "";
+  options.innerHTML = "";
   for (let i = 0; i<list.length; i++) {
     setTimeout(() => {
       contentBox.innerHTML += list[i].replace(">", "") + "<br>";
@@ -32,22 +35,25 @@ document.addEventListener("keydown", (event) => {
       case "BIO":
         input.innerText = "";
         selectionText = [];
-        elementDraw(bio)
+        elementDraw(bio + optionsInner)
         break;
       case "STACK":
         input.innerText = ""
         selectionText = []
         contentBox.innerHTML = stack;
+        elementDraw(stack + optionsInner)
         break;
       case "PROJECTS":
         input.innerText = ""
         selectionText = []
         contentBox.innerHTML = projects;
+        elementDraw(projects + optionsInner)
         break;
       case "CONTACT":
         input.innerText = ""
         selectionText = []
         contentBox.innerHTML = contact;
+        elementDraw(contact + optionsInner)
         break;
       default:
         input.innerText += "\nCommand Not Recognised\n"
