@@ -4,10 +4,20 @@ const bio = document.getElementById("bio").innerHTML
 const stack = document.getElementById("stack").innerHTML
 const projects = document.getElementById("projects").innerHTML
 const contact = document.getElementById("contact").innerHTML
-
+const options = document.getElementById("options").innerHTML
 
 let charArray = []
 let selectionText = []
+
+const elementDraw = (element) => {
+  const list = element.split("<br")
+  contentBox.innerHTML = "";
+  for (let i = 0; i<list.length; i++) {
+    setTimeout(() => {
+      contentBox.innerHTML += list[i].replace(">", "") + "<br>";
+    }, i*100);
+  }
+}
 
 document.addEventListener("keydown", (event) => {
   key = event.keyCode
@@ -22,8 +32,7 @@ document.addEventListener("keydown", (event) => {
       case "BIO":
         input.innerText = "";
         selectionText = [];
-        contentBox.innerHTML = bio;
-        console.log(bio)
+        elementDraw(bio)
         break;
       case "STACK":
         input.innerText = ""
