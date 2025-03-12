@@ -3,6 +3,9 @@
   src: url("amstrad_cpc464.ttf") format("truetype");
 }
 
+.hidden {
+  display: none;
+}
 
 .screen {
   background-color: rgb(29, 114, 219);
