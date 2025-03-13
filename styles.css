@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Amstrad";
-  src: url("amstrad_cpc464.ttf") format("truetype");
+  src: url("amstrad_cpc464.woff") format("truetype");
 }
 
 .hidden {
