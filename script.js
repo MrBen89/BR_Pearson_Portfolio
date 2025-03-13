@@ -50,6 +50,7 @@ document.addEventListener("keydown", (event) => {
         elementDraw(projects + optionsInner)
         break;
       case "CONTACT":
+        console.log(contact)
         input.innerText = ""
         selectionText = []
         contentBox.innerHTML = contact;

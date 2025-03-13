@@ -50,6 +50,17 @@ body {
   animation: blink 1.5s infinite;
 }
 
+.space-even {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.fa-icons {
+  fill: rgb(223, 228, 90);
+  height: 48px;
+}
+
 .screen::before {
   content: " ";
   display: block;
