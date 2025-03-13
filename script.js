@@ -11,9 +11,8 @@ let charArray = []
 let selectionText = []
 
 const elementDraw = (element) => {
-  console.log(element)
-  const list = element.split("<br")
-  contentBox.innerHTML = "";
+  const list = element.split("<br>")
+  console.log(list)
   options.innerHTML = "";
   for (let i = 0; i<list.length; i++) {
     setTimeout(() => {
@@ -33,27 +32,28 @@ document.addEventListener("keydown", (event) => {
   } else if (key == 13) {
     switch (selectionText.join("").toUpperCase()) {
       case "BIO":
+        contentBox.innerHTML = "";
         input.innerText = "";
         selectionText = [];
         elementDraw(bio + optionsInner)
         break;
       case "STACK":
+        contentBox.innerHTML = "";
         input.innerText = ""
         selectionText = []
         contentBox.innerHTML = stack;
-        elementDraw(stack + optionsInner)
+        elementDraw(optionsInner)
         break;
       case "PROJECTS":
+        contentBox.innerHTML = "";
         input.innerText = ""
         selectionText = []
-        contentBox.innerHTML = projects;
         elementDraw(projects + optionsInner)
         break;
       case "CONTACT":
-        console.log(contact)
+        contentBox.innerHTML = "";
         input.innerText = ""
         selectionText = []
-        contentBox.innerHTML = contact;
         elementDraw(contact + optionsInner)
         break;
       default:
