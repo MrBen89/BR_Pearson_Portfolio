@@ -17,6 +17,7 @@ const elementDraw = (element) => {
   for (let i = 0; i<list.length; i++) {
     setTimeout(() => {
       contentBox.innerHTML += list[i].replace(">", "") + "<br>";
+      document.getElementById("end-block").scrollIntoView({ behavior: "instant", block: "end" });
     }, i*100);
   }
 }
