@@ -45,9 +45,9 @@ body {
 }
 
 .text-display {
-  width: 100%;
+  width: 100% - 20px;
   height: 100%;
-  margin: 10px;
+
   padding: 10px;
   text-align: left;
   padding-bottom: 20px;
@@ -99,6 +99,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.project {
+  width: 30%;
+  justify-content: center;
+  text-align: center;
+}
+
+.screenshot {
+  width: 90%;
+  padding: 10px;
+
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .screen::before {

@@ -49,7 +49,8 @@ document.addEventListener("keydown", (event) => {
         contentBox.innerHTML = "";
         input.innerText = ""
         selectionText = []
-        elementDraw(projects + optionsInner)
+        contentBox.innerHTML = projects;
+        elementDraw(optionsInner)
         break;
       case "CONTACT":
         contentBox.innerHTML = "";
