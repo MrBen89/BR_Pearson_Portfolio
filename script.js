@@ -10,7 +10,7 @@ const options = document.getElementById("options")
 const optionsInner = document.getElementById("options-inner").innerHTML
 let mode = "input";
 let direction = "up";
-let snake_arr = [[5,5],[6,5],[7,5],[8,5]];
+let snake_arr = [[5,5],[5,4]];
 let snake_elements = [];
 let food = [2,7];
 
@@ -100,57 +100,33 @@ document.addEventListener("keydown", (event) => {
 
 })
 
-const snek_start = (() => {
-  snake_elements = [];
-  createBlock([5,5])
-  snek()
-})
-
-const createBlock = ((coords) => {
-  let segment = document.createElement("div");
-    segment.classList.add("snake-block")
-    segment.innerText = "";
-    moveBlock(segment, coords)
-    snake_elements.push(segment)
-    snake_arr.push(coords)
-    document.querySelector(".snake-box").appendChild(segment)
-})
-
-const moveBlock = ((block, coords) => {
-  block.style.top = `${coords[1] * 25}`
-  block.style.left = `${coords[0] * 25}`
+const draw = ((snake_arr) => {
+    const canvas = document.getElementById("snake-can");
+    canvas.width = 250;
+    canvas.height = 250;
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
+    ctx.fillStyle = "rgb(223, 228, 90)"
+    snake_arr.forEach((element) => {
+      ctx.fillRect(element[0]*25, element[1]*25, 25, 25)
+    })
 })
 
 const snek = (() => {
-  let temp_x = snake_arr[0][1]
-  let temp_y = snake_arr[0][0]
-  document.querySelector(".snake-box").innerHTML = ""
+  let temp_x = snake_arr[0][0]
+  let temp_y = snake_arr[0][1]
+
   if (direction == "up") {
-    snake_arr[0][0] -= 1;
+    snake_arr.unshift([temp_x,temp_y-1]);
   } else if (direction == "down") {
-    snake_arr[0][0] += 1;
+    snake_arr.unshift([temp_x,temp_y+1]);
   } else if (direction == "left") {
-    snake_arr[0][1] -= 1;
+    snake_arr.unshift([temp_x-1,temp_y]);
   } else if (direction == "right") {
-    snake_arr[0][1] += 1;
+    snake_arr.unshift([temp_x+1,temp_y]);
   }
+  snake_arr.pop();
+  draw(snake_arr);
 
-  for (let x=1; x<snake_arr.length; x++){
-    let temp2_x = snake_arr[x][1];
-    let temp2_y = snake_arr[x][0];
-    snake_arr[x] = [temp_x, temp_y];
-    temp_x = temp2_x;
-    temp_y = temp2_y;
-  }
-
-  snake_arr.forEach((element) => {
-    let segment = document.createElement("div");
-    segment.classList.add("snake-block")
-    segment.innerText = "";
-    segment.style.top = `${element[0] * 25}`
-    segment.style.left = `${element[1] * 25}`
-    document.querySelector(".snake-box").appendChild(segment)
-    console.log(element)
-  })
   setTimeout((snek), (2000 - snake_arr.length * 20))
 })
