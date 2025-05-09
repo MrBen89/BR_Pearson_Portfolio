@@ -122,13 +122,13 @@ body {
   border: 25px solid rgb(223, 228, 90);
   width: 250px;
   height: 250px;
+  margin: auto;
+  padding: 0;
+  display: block;
 }
 
-.snake-block {
-  width: 25px;
-  height: 25px;
-  background-color: rgb(223, 228, 90);
-  position: relative;
+.snake-box {
+  margin-left: auto;
 }
 
 .screen::before {

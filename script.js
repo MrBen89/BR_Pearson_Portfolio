@@ -10,9 +10,9 @@ const options = document.getElementById("options")
 const optionsInner = document.getElementById("options-inner").innerHTML
 let mode = "input";
 let direction = "up";
-let snake_arr = [[5,5],[5,4]];
-let snake_elements = [];
+let snake_arr = [[5,5]];
 let food = [2,7];
+let score = 0;
 
 let charArray = []
 let selectionText = []
@@ -72,6 +72,8 @@ document.addEventListener("keydown", (event) => {
           selectionText = []
           contentBox.innerHTML = snake;
           mode = "snake"
+          snake_arr = [[5,5]];
+          food = [2,7];
           snek()
           break;
         default:
@@ -81,16 +83,16 @@ document.addEventListener("keydown", (event) => {
 
     }
   } else if (mode == "snake"){
-    if (key == 37) {
+    if (key == 37 && direction != "right") {
       direction = "left";
       event.preventDefault();
-    } else if (key == 38) {
+    } else if (key == 38&& direction != "down") {
       direction = "up";
       event.preventDefault();
-    } else if (key == 39) {
+    } else if (key == 39 && direction != "left") {
       direction = "right";
       event.preventDefault();
-    } else if (key == 40) {
+    } else if (key == 40 && direction != "up") {
       direction = "down";
       event.preventDefault();
     } else if (key == 81) {
@@ -106,11 +108,50 @@ const draw = ((snake_arr) => {
     canvas.height = 250;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
-    ctx.fillStyle = "rgb(223, 228, 90)"
+    ctx.fillStyle = "rgb(223, 228, 90)";
     snake_arr.forEach((element) => {
       ctx.fillRect(element[0]*25, element[1]*25, 25, 25)
     })
+
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect((food[0] *25) + 5, (food[1] * 25) + 5, 15, 15);
 })
+
+const eat_food = (() => {
+  food[0] = Math.floor(Math.random() *10);
+  food[1] = Math.floor(Math.random() *10);
+  snake_arr.forEach((element) => {
+    if (food[0] == element[0] && food[1] == element[1]){
+      eat_food();
+    };
+  });
+  console.log(food);
+});
+
+const is_gameover = (() => {
+  if (snake_arr[0][0] < 0 || snake_arr[0][0] > 10 || snake_arr[0][1] < 0 || snake_arr[0][1] > 10){
+    return true;
+  };
+  snake_arr.slice(1).forEach((element) => {
+    if (element[0] == snake_arr[0][0] && element[1] == snake_arr[0][1]){
+      return true;
+    };
+  });
+
+  return false;
+});
+
+const game_over = (() => {
+  const canvas = document.getElementById("snake-can");
+  canvas.width = 250;
+  canvas.height = 250;
+  const ctx = canvas.getContext("2d");
+  ctx.font = ("20px Amstrad")
+  ctx.fillStyle = "rgb(223, 228, 90)";
+  ctx.fillText("GAME OVER", 37, 100);
+  ctx.fillText(score, 120, 150);
+  mode = "input";
+});
 
 const snek = (() => {
   let temp_x = snake_arr[0][0]
@@ -125,8 +166,17 @@ const snek = (() => {
   } else if (direction == "right") {
     snake_arr.unshift([temp_x+1,temp_y]);
   }
-  snake_arr.pop();
-  draw(snake_arr);
+  if (is_gameover()) {
+    game_over();
+  } else if (snake_arr[0][0] == food[0] && snake_arr[0][1] == food[1]){
+    eat_food();
+    score ++;
+    draw(snake_arr);
+    setTimeout((snek), (800 - snake_arr.length * 20))
+  } else {
+    snake_arr.pop();
+    draw(snake_arr);
+    setTimeout((snek), (800 - snake_arr.length * 20))
+  }
 
-  setTimeout((snek), (2000 - snake_arr.length * 20))
 })
