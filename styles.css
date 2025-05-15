@@ -116,6 +116,7 @@ body {
 .flex-wrapper {
   display: flex;
   justify-content: space-between;
+  height: fit-content;
 }
 
 #snake-can {
