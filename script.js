@@ -23,7 +23,7 @@ const elementDraw = (element) => {
   options.innerHTML = "";
   for (let i = 0; i<list.length; i++) {
     setTimeout(() => {
-      contentBox.innerHTML += list[i].replace(">", "") + "<br>";
+      contentBox.innerHTML += list[i] + "<br>";
       document.getElementById("end-block").scrollIntoView({ behavior: "instant", block: "end" });
     }, i*100);
   }
@@ -125,7 +125,6 @@ const eat_food = (() => {
       eat_food();
     };
   });
-  console.log(food);
 });
 
 const is_gameover = (() => {
@@ -137,6 +136,7 @@ const is_gameover = (() => {
     string_arr.push(element.toString())
   });
   let unique = Array.from(new Set(string_arr))
+  console.log(string_arr + unique)
   return (unique.length != string_arr.length)
 });
 
