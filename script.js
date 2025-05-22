@@ -132,9 +132,9 @@ const is_gameover = (() => {
   if (snake_arr[0][0] < 0 || snake_arr[0][0] > 10 || snake_arr[0][1] < 0 || snake_arr[0][1] > 10){
     return true;
   };
-  const truncated = snake_arr.slice(1)
-  console.log(truncated)
+  const truncated = snake_arr.slice(1,99)
   truncated.forEach((element) => {
+    console.log(element[0], snake_arr[0][0])
     if (element[0] == snake_arr[0][0] && element[1] == snake_arr[0][1]){
       return true;
     };
