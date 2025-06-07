@@ -40,7 +40,8 @@ document.addEventListener("keydown", (event) => {
       input.innerText += selectionText.join("")
     } else if (key == 8){
       selectionText.pop()
-      input.innerText = selectionText.join("")
+      input.innerText = textHistory
+      input.innerText += selectionText.join("")
     } else if (key == 13) {
       switch (selectionText.join("").toUpperCase()) {
         case "BIO":
