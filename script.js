@@ -15,6 +15,7 @@ let food = [2,7];
 let score = 0;
 
 let charArray = []
+let textHistory = []
 let selectionText = []
 
 const elementDraw = (element) => {
@@ -29,12 +30,14 @@ const elementDraw = (element) => {
   }
 }
 
+
 document.addEventListener("keydown", (event) => {
   key = event.keyCode
   if (mode == "input"){
     if (key >= 65 && key <= 90 || (key >= 48 && key <= 57) || (key >= 97 && key <= 122)) {
       selectionText.push(event.key)
-      input.innerText = selectionText.join("")
+      input.innerText = textHistory
+      input.innerText += selectionText.join("")
     } else if (key == 8){
       selectionText.pop()
       input.innerText = selectionText.join("")
@@ -43,12 +46,14 @@ document.addEventListener("keydown", (event) => {
         case "BIO":
           contentBox.innerHTML = "";
           input.innerText = "";
+          textHistory = "";
           selectionText = [];
           elementDraw(bio + optionsInner)
           break;
         case "STACK":
           contentBox.innerHTML = "";
           input.innerText = ""
+          textHistory = "";
           selectionText = []
           contentBox.innerHTML = stack;
           elementDraw(optionsInner)
@@ -56,6 +61,7 @@ document.addEventListener("keydown", (event) => {
         case "PROJECTS":
           contentBox.innerHTML = "";
           input.innerText = ""
+          textHistory = "";
           selectionText = []
           contentBox.innerHTML = projects;
           elementDraw(optionsInner)
@@ -63,12 +69,14 @@ document.addEventListener("keydown", (event) => {
         case "CONTACT":
           contentBox.innerHTML = "";
           input.innerText = ""
+          textHistory = "";
           selectionText = []
           elementDraw(contact + optionsInner)
           break;
         case "SNAKE":
           contentBox.innerHTML = "";
           input.innerText = ""
+          textHistory = "";
           selectionText = []
           contentBox.innerHTML = snake;
           mode = "snake"
@@ -78,6 +86,9 @@ document.addEventListener("keydown", (event) => {
           break;
         default:
           input.innerText += "\nCommand Not Recognised\n"
+          textHistory = input.innerText
+          selectionText = []
+          document.getElementById("end-block").scrollIntoView({ behavior: "instant", block: "end" });
           break;
       }
 
