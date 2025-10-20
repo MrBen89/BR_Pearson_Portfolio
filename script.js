@@ -79,7 +79,7 @@ document.addEventListener("keydown", (event) => {
           textHistory = "";
           selectionText = []
           contentBox.innerHTML = stack;
-          elementDraw(optionsInner)
+          lang == "english" ? elementDraw(optionsInner) : elementDraw(optionsInnerjp);
           break;
         case "PROJECTS":
           contentBox.innerHTML = "";
@@ -104,7 +104,7 @@ document.addEventListener("keydown", (event) => {
           textHistory = "";
           selectionText = []
           contentBox.classList.remove("japanese")
-          elementDraw(contact + optionsInner)
+          lang == "english" ? elementDraw(contact + optionsInner) : elementDraw(contact + optionsInnerjp);
           break;
         case "SNAKE":
           contentBox.innerHTML = "";
