@@ -39,6 +39,7 @@ const elementDraw = (element) => {
 }
 
 if (lang == "japanese") {
+  contentBox.classList.add("japanese")
   contentBox.innerHTML = "";
   input.innerText = ""
   textHistory = "";
@@ -64,7 +65,13 @@ document.addEventListener("keydown", (event) => {
           input.innerText = "";
           textHistory = "";
           selectionText = [];
-          lang == "english" ? elementDraw(bio + optionsInner) : elementDraw(biojp + optionsInnerjp)
+          if (lang == "english"){
+            contentBox.classList.remove("japanese")
+            elementDraw(bio + optionsInner)
+          } else {
+            contentBox.classList.add("japanese")
+            elementDraw(biojp + optionsInnerjp)
+          }
           break;
         case "STACK":
           contentBox.innerHTML = "";
@@ -80,18 +87,23 @@ document.addEventListener("keydown", (event) => {
           textHistory = "";
           selectionText = []
           if (lang == "english"){
+            contentBox.classList.remove("japanese")
             contentBox.innerHTML = projects
+            elementDraw(optionsInner)
           } else {
+            contentBox.classList.add("japanese")
             contentBox.innerHTML = projectsjp;
+            elementDraw(optionsInnerjp)
           }
 
-          elementDraw(optionsInner)
+
           break;
         case "CONTACT":
           contentBox.innerHTML = "";
           input.innerText = ""
           textHistory = "";
           selectionText = []
+          contentBox.classList.remove("japanese")
           elementDraw(contact + optionsInner)
           break;
         case "SNAKE":
@@ -111,6 +123,7 @@ document.addEventListener("keydown", (event) => {
           input.innerText = ""
           textHistory = "";
           selectionText = []
+          contentBox.classList.add("japanese")
           elementDraw(optionsInnerjp)
           break;
         case "ENGLISH":
@@ -119,6 +132,7 @@ document.addEventListener("keydown", (event) => {
           input.innerText = ""
           textHistory = "";
           selectionText = []
+          contentBox.classList.remove("japanese")
           elementDraw(optionsInner)
           break;
         default:
