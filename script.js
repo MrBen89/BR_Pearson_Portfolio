@@ -1,14 +1,18 @@
 const input = document.getElementById("selection")
 const contentBox = document.getElementById("content")
 const bio = document.getElementById("bio").innerHTML
+const biojp = document.getElementById("bio-jp").innerHTML
 const stack = document.getElementById("stack").innerHTML
 const projects = document.getElementById("projects").innerHTML
+const projectsjp = document.getElementById("projects-jp").innerHTML
 const contact = document.getElementById("contact").innerHTML
 const snake = document.getElementById("snake").innerHTML
 const snake_box = document.getElementById("snake-box")
 const options = document.getElementById("options")
+const optionsInnerjp = document.getElementById("options-inner-jp").innerHTML
 const optionsInner = document.getElementById("options-inner").innerHTML
 let mode = "input";
+let lang = "english"
 let direction = "up";
 let snake_arr = [[5,5]];
 let food = [2,7];
@@ -17,10 +21,14 @@ let score = 0;
 let charArray = []
 let textHistory = []
 let selectionText = []
+browserlang = navigator.language
+
+if (browserlang == "ja" || browserlang == "ja-JP") {
+  lang = "japanese"
+}
 
 const elementDraw = (element) => {
   const list = element.split("<br>")
-  console.log(list)
   options.innerHTML = "";
   for (let i = 0; i<list.length; i++) {
     setTimeout(() => {
@@ -30,6 +38,13 @@ const elementDraw = (element) => {
   }
 }
 
+if (lang == "japanese") {
+  contentBox.innerHTML = "";
+  input.innerText = ""
+  textHistory = "";
+  selectionText = []
+  elementDraw(optionsInnerjp)
+}
 
 document.addEventListener("keydown", (event) => {
   key = event.keyCode
@@ -49,7 +64,7 @@ document.addEventListener("keydown", (event) => {
           input.innerText = "";
           textHistory = "";
           selectionText = [];
-          elementDraw(bio + optionsInner)
+          lang == "english" ? elementDraw(bio + optionsInner) : elementDraw(biojp + optionsInnerjp)
           break;
         case "STACK":
           contentBox.innerHTML = "";
@@ -64,7 +79,12 @@ document.addEventListener("keydown", (event) => {
           input.innerText = ""
           textHistory = "";
           selectionText = []
-          contentBox.innerHTML = projects;
+          if (lang == "english"){
+            contentBox.innerHTML = projects
+          } else {
+            contentBox.innerHTML = projectsjp;
+          }
+
           elementDraw(optionsInner)
           break;
         case "CONTACT":
@@ -84,6 +104,22 @@ document.addEventListener("keydown", (event) => {
           snake_arr = [[5,5]];
           food = [2,7];
           snek()
+          break;
+        case "JAPANESE":
+          lang = "japanese"
+          contentBox.innerHTML = "";
+          input.innerText = ""
+          textHistory = "";
+          selectionText = []
+          elementDraw(optionsInnerjp)
+          break;
+        case "ENGLISH":
+          lang = "english"
+          contentBox.innerHTML = "";
+          input.innerText = ""
+          textHistory = "";
+          selectionText = []
+          elementDraw(optionsInner)
           break;
         default:
           input.innerText += "\nCommand Not Recognised\n"
@@ -148,7 +184,6 @@ const is_gameover = (() => {
     string_arr.push(element.toString())
   });
   let unique = Array.from(new Set(string_arr))
-  console.log(string_arr + unique)
   return (unique.length != string_arr.length)
 });
 

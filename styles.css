@@ -3,6 +3,11 @@
   src: url("amstrad_cpc464.woff") format("truetype");
 }
 
+@font-face {
+  font-family: "NEC";
+  src: url("KHdot.ttf") format("truetype");
+}
+
 .hidden {
   display: none;
 }
@@ -21,6 +26,14 @@
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-snap-type: proximity;
+}
+
+.english {
+  font-family: "Amstrad";
+}
+
+.japanese {
+  font-family: "NEC";
 }
 
 .monitor {
